@@ -167,11 +167,13 @@ progress {
     width: 90%;
     background: white;
     /*  */
-    border: 2px solid rgb(32, 160, 221);
+    border-left: 2px solid rgb(32, 160, 221);
+    border-bottom: 2px solid rgb(32, 160, 221);
+    border-right: 2px solid rgb(32, 160, 221);
     /* border-top: 2px solid rgb(63, 205, 241); */
     /* border-right: 2px solid rgb(63, 205, 241); */
     /*  */
-    border-radius: 15px;
+    border-radius: 15px 15px 15px 15px;
     /*  */
     display:flex;
     flex-direction: row;
@@ -182,8 +184,35 @@ progress {
 #left_top1,
 #left_top2,
 #left_top3 {
-    width:33%;
+    height: 100%;
+    width:33.3333%;
     /* border-right: 1px solid rgba(128, 128, 128, 0.377); */
+}
+#left_top3 #two p{
+    margin:0;
+    padding:0;
+}
+#one{
+    height: 15%;
+    background:rgb(32, 160, 221);
+    color:white;
+    font-size: 20px;
+    /*  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*  */
+    border-radius: 15px 15px 0px 0px;
+}
+#two{
+    height: 85%;
+    /* color:white; */
+    font-size: 18px;
+    /*  */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #left_bottom {
@@ -261,6 +290,7 @@ progress {
     justify-content: center;
     align-items: center;
     color:rgb(14, 233, 14);
+    font-size: 25px;
 }
 #left_bottom_right {
     height: 90%;
