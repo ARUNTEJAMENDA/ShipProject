@@ -80,14 +80,22 @@
             <div id="left_container">
                 <div id="left_top">
                     <div id="left_top1">
-
+                        <div id="one">
+                            GYROSCOPE
+                        </div>
+                        <div id="two"></div>
                     </div>
                     <div id="left_top2">
-                        <div class="gauge">
-                            <div class="gauge__body" id="gbody">
-                                <div class="gauge__fill"></div>
-                                <div class="gauge__cover"></div>
-                            </div>
+                        <div id="one">
+                            SPEEDOMETER
+                        </div>
+                        <div id="two">
+                            <div class="gauge">
+                                <div class="gauge__body" id="gbody">
+                                    <div class="gauge__fill"></div>
+                                    <div class="gauge__cover"></div>
+                                </div>
+                            </div>    
                         </div>
                     </div>
                     <script>
@@ -104,7 +112,7 @@
                             }turn)`;
                             gauge.querySelector(".gauge__cover").textContent = `${Math.round(
                                 value * 100
-                            )}kmph`;
+                            )}nmph`;
                         }
                         setGaugeValue(gaugeElement,0);
                         setInterval(function(){
@@ -120,21 +128,26 @@
                         },100);
                     </script>
                     <div id="left_top3">
-                        <p style="text-align: center;font-size: 20px;font-weight: bold;color:red;">North</p>
-                        <div class="container">
-                            <!-- <input type="text" placeholder="Enter the value" class="input-deg" id="input" autofocus> -->
-                            <div class="n"> 0<sup>0</sup></div>
-                            <div class="sub-container">
-                                <div class="w">270<sup>0</sup></div>
-                                <div class="background" id="compass-shell">
-                                    <div id="north"></div>
-                                    <div id="south"></div>
-                                </div>
-                                <div class="e">90<sup>0</sup></div>
-                            </div>
-                            <div class="s"> 180<sup>0</sup></div>
+                        <div id="one">
+                            MAGNETO-METER
                         </div>
-                        <p style="text-align: center;font-size: 20px;font-weight: bold;color:red;">South</p>
+                        <div id="two">
+                            <p style="text-align: center;font-size: 20px;font-weight: bold;color:red;">North</p>
+                            <div class="container">
+                                <!-- <input type="text" placeholder="Enter the value" class="input-deg" id="input" autofocus> -->
+                                <div class="n"> 0<sup>°</sup></div>
+                                <div class="sub-container">
+                                    <div class="w">270<sup>°</sup></div>
+                                    <div class="background" id="compass-shell">
+                                        <div id="north"></div>
+                                        <div id="south"></div>
+                                    </div>
+                                    <div class="e">90<sup>°</sup></div>
+                                </div>
+                                <div class="s"> 180<sup>°</sup></div>
+                            </div>
+                            <p style="text-align: center;font-size: 20px;font-weight: bold;color:red;">South</p>    
+                        </div>
                     </div>
                     <script>
                         // const input = document.getElementById("input");
@@ -232,7 +245,7 @@
         <div id="right">
             <div id="right_top">
                 <video id='stream' height="480px" width="640px" controls >
-                    <source src="640x480.mp4" type="video/mp4">
+                    <source src="rrr.mp4" type="video/mp4">
                 </video>
             </div>
             <div id="right_bottom">
