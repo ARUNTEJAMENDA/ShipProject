@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> SHAFAN PORTAL</title>
+        <meta charset="utf-8"/>
+        <script src="jquery.js"></script>
+        <link rel="stylesheet" href="index.css"/>
+        <link rel="icon" href="shafan.ico"/>
+        <meta name="viewport" content="width=device-width,initial-scale=0"/>
+        <meta name="og-description" content="Shafan Ship Project..."/>
+    </head>
+    <body>
+        <header id="header">
+            <div id="header_left">
+                <img src="shafan.png" alt="logo"/>
+            </div>
+            <div id="header_right">
+                <ul id="ul">
+                    <li id="home">Home</li>
+                    <li>
+                        <select>
+                            <option>Controls</option>
+                            <option>one</option>
+                            <option>two</option>
+                            <option>three</option>
+                        </select>
+                    </li>
+                    <li>Reviews</li>
+                    <li>Hire With Us</li>
+                </ul>
+            </div>
+        </header>
+        <!------------------------------------------------------------------------------->
+        <div id="banner">
+            <p>--- 🚢 Shafan Ship Control Board, AP 🚢---</p>
+        </div>
+        <!------------------------------------------------------------------------------->
+        <div id="main">
+            <div id="main_left">
+                <h1>𝐒𝐇𝐀𝐅𝐀𝐍</h1>
+                <p>CONTROL AND ADMIN BOARD FOR YOUR SHIPS.</p>
+            </div>
+            <div id="main_right">
+                <!--  -->
+                <!--  -->
+                <div id="card" class="card1">
+                    <div id="box">
+                        <div class='login1'><input id='uid' type='text' name='uid' placeholder='UserId' required/><input id='pass' type='text' name='pass' placeholder='Password' required/><button id='submit'>Login</button></div>
+                        <div id="box_x">
+                            <div id="card_top"></div>
+                            <div id="card_middle"></div>
+                            <div id="card_middledown"></div>
+                        </div>
+                    </div>
+                    <div id="card_bottom">
+                        <button id="c1" onclick="login(this.id)">Login</button>
+                    </div>
+                </div>
+                <div id="card" class="card2">
+                    <div id="box">
+                        <div class='login2'><input id='uid' type='text' name='uid' placeholder='UserId' required/><input id='pass' type='text' name='pass' placeholder='Password' required/><button id='submit'>Login</button></div>
+                        <div id="box_x">
+                            <div id="card_top"></div>
+                            <div id="card_middle"></div>
+                            <div id="card_middledown"></div>
+                        </div>
+                    </div>
+                    <div id="card_bottom">
+                        <button id="c2" onclick="login(this.id)">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------------->
+        <script>
+            function login(id){
+                if (id=="c1"){
+                    if (document.getElementById(id).textContent=="Login"){
+                        $(".card1 #box #box_x").css("display","none");
+                        $("."+id).css("display","flex");
+                        document.getElementById(id).textContent ="Back";
+                    }else{
+                        // alert(id);
+                        location.reload();
+                    }
+                }else{
+                    if (document.getElementById(id).textContent=="Login"){
+                        $(".card2 #box #box_x").css("display","none");
+                        $("."+id).css("display","flex");
+                        document.getElementById(id).textContent="Back";
+                    }else{
+                        // alert(id);
+                        location.reload();
+                    }
+                }
+            }
+        </script>
+        <!----------------------------------------------->
+    </body>
+</html>

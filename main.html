@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ship Control Board</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8" />
+    <script src="jquery.js"></script>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        #p0::after {
+            content: "location1";
+        }
+        
+        #p25::after {
+            content: "location2";
+        }
+        
+        #p50::after {
+            content: "location3";
+        }
+        
+        #p75::after {
+            content: "location4";
+        }
+        
+        #p100::after {
+            content: "location";
+        }
+        /* speedometer */
+        .container{height: 100%;background-size: cover;display: flex;flex-direction: column;justify-content: center;align-items: center; } .gauge {width: 100%;max-width: 250px;font-family: "Roboto", sans-serif;font-size: 32px;color: #004033;   } .gauge__body {width: 100%;height: 0;padding-bottom: 50%;background: #b4c0be;position: relative;border-top-left-radius: 100% 200%;border-top-right-radius: 100% 200%;overflow: hidden;   } .gauge__fill {position: absolute;top: 100%;left: 0;width: inherit;height: 100%;background: #009578;transform-origin: center top;transform: rotate(0.25turn);transition: transform 0.2s ease-out;   } .gauge__cover {width: 75%;height: 150%;background: bisque;border-radius: 50%;position: absolute;top: 25%;left: 50%;transform: translateX(-50%);   /* Text */display: flex;align-items: center;justify-content: center;padding-bottom: 25%;box-sizing: border-box;   }    #input{  border-radius: 5px;  font-size: 20px;margin-bottom: 50px;border: 2px solid grey;padding: 5px;}
+        /* compass */
+        .sub-container{display: flex;align-items: center; }
+        .input-deg{font-size: 20px;outline: none;border: none;box-shadow: 0 0 5px;margin-bottom: 100px;border-radius: 10px;font-family: 'Red Hat Mono', monospace;padding: 10px; }
+        .n,.s,.e,.w{font-size: 25px;font-weight: bold; }
+        .background{width:100px;height:100px;background-color: aliceblue;border-radius: 50%;display: flex;flex-direction: column;align-items: center;justify-content: center;box-shadow: 0 0 10px;border: 2px solid black; }
+        #north{border-bottom: 40px solid #c03926;border-right: 15px solid transparent;border-left: 15px solid transparent;border-top: 100px solid transparent;}
+        #north::after{content: 'N';position: absolute;top: 30px;right: 42px;font-size: 20px;font-weight: bolder; }
+        #south{border-top: 40px solid #298069;border-right: 15px solid transparent;border-left: 15px solid transparent;border-bottom: 100px solid transparent;}
+        #south::before{content: 'S';position: absolute;bottom:30px;right: 45px;font-size: 20px;font-weight: bold; }
+        .output{width: 200px;height: 50px;background-color: white;border: 2px solid rgb(47, 0, 255);display: flex;justify-content: center;align-items: center; }
+        #degValue{font-size: 25px;font-weight: bold; }
+    </style>
+</head>
+
+<body>
+    <section id="top">
+        <div id="company">
+            <img id="logo" src="shafan.png" alt="logo" />
+        </div>
+        <div id="progress_back">
+            <progress id="progress_bar" value="" max="100"></progress>
+            <div id="places">
+                <abbr title="location 1"><span class="places_span" id="p0">L1</span></abbr>
+                <abbr title="location 2"><span class="places_span" id="p25">L2</span></abbr>
+                <abbr title="location 3"><span class="places_span" id="p50">L3</span></abbr>
+                <abbr title="location 4"><span class="places_span" id="p75">L4</span></abbr>
+                <abbr title="location 5"><span class="places_span" id="p100">L5</span></abbr>
+            </div>
+        </div>
+    </section>
+    <!--  -->
+    <script>
+        progress(45);
+        function progress(val) {
+            document.getElementById("progress_bar").value = val;
+            for (var i = 0; i <= val; i += 25) {
+                $("#p" + i).css("color", "lightgreen");
+                $("#p" + i).css("color", "lightgreen");
+                // $("#p" + i).css("font-size", "17px");
+                $("#p" + i).css("font-weight", "bold");
+                $("#p" + i).css("background", "rgb(0, 117, 255)");
+            }
+        }
+    </script>
+    <!--  -->
+    <section id="bottom">
+        <div id="left">
+            <div id="left_container">
+                <div id="left_top">
+                    <div id="left_top1">
+
+                    </div>
+                    <div id="left_top2">
+                        <div class="gauge">
+                            <div class="gauge__body" id="gbody">
+                                <div class="gauge__fill"></div>
+                                <div class="gauge__cover"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        const gaugeElement = document.querySelector(".gauge");
+                        // const input = document.getElementById('input');
+                        const gbody = document.getElementById('gbody');
+                        gaugeElement.querySelector('.gauge__fill').style.transition = 'all 1s';
+                        function setGaugeValue(gauge, value) {
+                            if (value < 0 || value > 1) {
+                                return;
+                            }
+                            gauge.querySelector(".gauge__fill").style.transform = `rotate(${
+                                value / 2
+                            }turn)`;
+                            gauge.querySelector(".gauge__cover").textContent = `${Math.round(
+                                value * 100
+                            )}kmph`;
+                        }
+                        setGaugeValue(gaugeElement,0);
+                        setInterval(function(){
+                        // input.addEventListener('keydown',(event)=>{
+                            // if(event.key =='Enter'){
+                                // let val = parseInt(input.value);
+                                let val = parseInt((Math.random()*100)+1);
+                                console.log(val/10);
+                                setGaugeValue(gaugeElement,val/100);
+                                // input.value=''
+                            // }
+                        // })
+                        },100);
+                    </script>
+                    <div id="left_top3">
+                        <p style="text-align: center;font-size: 20px;font-weight: bold;color:red;">North</p>
+                        <div class="container">
+                            <!-- <input type="text" placeholder="Enter the value" class="input-deg" id="input" autofocus> -->
+                            <div class="n"> 0<sup>0</sup></div>
+                            <div class="sub-container">
+                                <div class="w">270<sup>0</sup></div>
+                                <div class="background" id="compass-shell">
+                                    <div id="north"></div>
+                                    <div id="south"></div>
+                                </div>
+                                <div class="e">90<sup>0</sup></div>
+                            </div>
+                            <div class="s"> 180<sup>0</sup></div>
+                        </div>
+                        <p style="text-align: center;font-size: 20px;font-weight: bold;color:red;">South</p>
+                    </div>
+                    <script>
+                        // const input = document.getElementById("input");
+                        const shell = document.getElementById("compass-shell");
+                        shell.style.transition = 'all 1s';
+                        setInterval(function(){
+                            // input.addEventListener('keydown',(event)=>{
+                            // if(event.key=='Enter'){
+                                var val = (Math.random()*100)+1;
+                                // if(parseInt(input.value)<=360){
+                                if(parseInt(val)<=360){
+                                    shell.style.transform = `rotate(${val}deg)`;
+                                    // shell.style.transform = `rotate(${input.value}deg)`;
+                                    // input.value= "";
+                                }
+                            // }
+                        // })
+                        },100);
+                    </script>
+
+                </div>
+                <div id="left_bottom">
+                    <div id="left_bottom_left">
+                        <div id="left_bottom_left_top">
+                            DISTANCE MEASUREMENT
+                        </div>
+                        <div id="left_bottom_left_bottom">
+                            <div id="box1">
+                                <span class="heading">Front</span>
+                                <span id="val1" class="value">35u</span>
+                            </div>
+                            <div id="box2">
+                                <span class="heading">Back</span>
+                                <span id="val2" class="value">75u</span>
+                            </div>
+                            <div id="box3">
+                                <span class="heading">Water Depth</span>
+                                <span id="val3" class="value">100m</span>
+                            </div>
+                            <div id="box4">
+                                <span class="heading">Under Water</span>
+                                <span id="val4" class="value">50m</span>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        setInterval(
+                            function(){
+                                var element1 = document.getElementById('val1');
+                                const x1 = Math.floor(Math.random() * 100);
+                                if (x1>50){
+                                    element1.textContent = x1 + "u";
+                                    $("#val1").css("color","red");
+                                    
+                                }else{
+                                    $("#val1").css("color","rgb(14, 233, 14)");
+                                }
+                                var element2 = document.getElementById('val2');
+                                const x2 = Math.floor(Math.random() * 100);
+                                if (x2>50){
+                                    element2.textContent = x2 + "u";
+                                    $("#val2").css("color","red");
+                                    
+                                }else{
+                                    $("#val2").css("color","rgb(14, 233, 14)");
+                                }
+                                var element3 = document.getElementById('val3');
+                                const x3 = Math.floor(Math.random() * 100);
+                                if (x3>50){
+                                    element3.textContent = x3 + "m";
+                                    $("#val3").css("color","red");
+                                    
+                                }else{
+                                    $("#val3").css("color","rgb(14, 233, 14)");
+                                }
+                                var element4 = document.getElementById('val4');
+                                const x4 = Math.floor(Math.random() * 100);
+                                if (x4>50){
+                                    element4.textContent = x4 + "m";
+                                    $("#val4").css("color","red");
+                                    
+                                }else{
+                                    $("#val4").css("color","rgb(14, 233, 14)");
+                                }
+                            }
+                        ,1000);
+                    </script>
+                    <div id="left_bottom_right" onclick="alert('Going to safe point..!!');">
+                        <div id="q1"><img id='safepoint' src='safepoint.png'/></div>
+                        <div id="q2">Safe Point</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="right">
+            <div id="right_top">
+                <video id='stream' height="480px" width="640px" controls >
+                    <source src="rrr.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div id="right_bottom">
+                <div id="right_bottom1">
+                    <div id="heading">Weather</div>
+                    <div class="value">
+                        <p>weather report</p>
+                        <p>weather report</p>
+                        <p>weather report</p>
+                        <p>weather report</p>
+                        <p>weather report</p>
+                    </div>
+                </div>
+                <div id="right_bottom2"></div>
+                <script>
+                    function getDateTime() {
+                        var now     = new Date(); 
+                        var year    = now.getFullYear();
+                        var month   = now.getMonth()+1; 
+                        var day     = now.getDate();
+                        var hour    = now.getHours();
+                        var minute  = now.getMinutes();
+                        var second  = now.getSeconds(); 
+                        if(month.toString().length == 1) {
+                            month = '0'+month;
+                        }
+                        if(day.toString().length == 1) {
+                            day = '0'+day;
+                        }   
+                        if(hour.toString().length == 1) {
+                            hour = '0'+hour;
+                        }
+                        if(minute.toString().length == 1) {
+                            minute = '0'+minute;
+                        }
+                        if(second.toString().length == 1) {
+                            second = '0'+second;
+                        }   
+                        var dateTime = "<p>"+year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;
+                        return dateTime;
+                    }
+
+                    // example usage: realtime clock
+                    setInterval(function(){
+                        currentTime = getDateTime();
+                        const patch = document.getElementById("right_bottom2").innerHTML;
+                        var message = ": log is log log log !!!!!!!!! </p>"
+                        document.getElementById("right_bottom2").innerHTML =  currentTime +message+ patch;
+                    }, 1000);
+                </script>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
